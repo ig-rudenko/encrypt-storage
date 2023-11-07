@@ -2,8 +2,8 @@ from datetime import datetime
 from urllib.parse import urlparse
 
 from aiohttp import ClientSession
-from urllib3.exceptions import ResponseError
 from cryptography.fernet import Fernet
+from urllib3.exceptions import ResponseError
 
 from ..types import File
 
@@ -84,7 +84,6 @@ class YandexDiskClient:
             file.write(decrypted_data)
 
     async def list_files(self, remote_path):
-        files: list[File] = []
         # Получаем список файлов в указанной директории
         async with ClientSession(self.base_url) as session:
             response = await session.get(
@@ -97,14 +96,12 @@ class YandexDiskClient:
             files_data = await response.json()
 
             return [
-                files.append(
-                    File(
-                        name=item["name"],
-                        path=item["path"][6:],
-                        size=item.get("size", 0),
-                        modified=datetime.fromisoformat(item["modified"]),
-                        is_dir=item["type"] == "dir",
-                    )
+                File(
+                    name=item["name"],
+                    path=item["path"][6:],
+                    size=item.get("size", 0),
+                    modified=datetime.fromisoformat(item["modified"]),
+                    is_dir=item["type"] == "dir",
                 )
                 for item in files_data["_embedded"]["items"]
             ]

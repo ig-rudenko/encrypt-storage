@@ -73,7 +73,6 @@ class YandexDiskClient:
             file.write(decrypted_data)
 
     def list_files(self, remote_path):
-        files: list[File] = []
         # Получаем список файлов в указанной директории
         response = requests.get(
             f"{self.base_url}/resources",
@@ -87,14 +86,12 @@ class YandexDiskClient:
             )
 
         return [
-            files.append(
-                File(
-                    name=item["name"],
-                    path=item["path"][6:],
-                    size=item.get("size", 0),
-                    modified=datetime.fromisoformat(item["modified"]),
-                    is_dir=item["type"] == "dir",
-                )
+            File(
+                name=item["name"],
+                path=item["path"][6:],
+                size=item.get("size", 0),
+                modified=datetime.fromisoformat(item["modified"]),
+                is_dir=item["type"] == "dir",
             )
             for item in response.json()["_embedded"]["items"]
         ]
