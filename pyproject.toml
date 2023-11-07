@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "encrypt-storage"
+version = "0.1.1"
+description = ""
+authors = ["ig-rudenko <ig.rudenko1@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "storages"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = ">=2.31.0"
+cryptography = ">=41.0.5"
+aiohttp = ">=3.8.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
