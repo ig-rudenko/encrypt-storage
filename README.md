@@ -1,13 +1,15 @@
 ### Позволяет использовать Яндекс диск как хранилище с шифрованием
 
-Синхронное использование
-```python
-from storages import YandexDiskClient
+Используется потоковое шифрование
 
+Синхронное использование
+
+```python
+from encrypt_storages import YandexDiskStorage
 
 # Замените 'YOUR_ACCESS_TOKEN' на ваш токен Яндекс.Диска
 # Замените 'YOUR_ENCRYPTION_KEY' на ваш ключ шифрования
-yandex_disk = YandexDiskClient(
+yandex_disk = YandexDiskStorage(
     "YOUR_ACCESS_TOKEN",
     "YOUR_ENCRYPTION_KEY",
 )
@@ -19,7 +21,7 @@ yandex_disk.upload_and_encrypt_file(local_file, remote_path)
 
 # Пример дешифрования файла
 decrypted_local_file = "docker-compose2.yaml"
-yandex_disk.decrypt_file(remote_path, decrypted_local_file)
+yandex_disk.download_and_decrypt_file(remote_path, decrypted_local_file)
 
 # Пример получения данных файлов
 files = yandex_disk.list_files("/")
@@ -31,13 +33,13 @@ print(files)
 ```python
 import asyncio
 
-from storages.asyncio import YandexDiskClient
+from encrypt_storages.asyncio import YandexDiskStorage
 
 
 async def main():
     # Замените 'YOUR_ACCESS_TOKEN' на ваш токен Яндекс.Диска
     # Замените 'YOUR_ENCRYPTION_KEY' на ваш ключ шифрования
-    yandex_disk = YandexDiskClient(
+    yandex_disk = YandexDiskStorage(
         "YOUR_ACCESS_TOKEN",
         "YOUR_ENCRYPTION_KEY",
     )
@@ -49,7 +51,7 @@ async def main():
 
     # Пример дешифрования файла
     decrypted_local_file = "docker-compose2.yaml"
-    await yandex_disk.decrypt_file(remote_path, decrypted_local_file)
+    await yandex_disk.download_and_decrypt_file(remote_path, decrypted_local_file)
 
     # Пример получения метаданных файлов
     files = await yandex_disk.list_files("/")

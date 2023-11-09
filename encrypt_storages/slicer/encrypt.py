@@ -20,3 +20,17 @@ class EncryptSlicer:
             if not data:
                 break
             yield self._encryptor.encrypt(data)
+
+
+class AsyncEncryptSlicer:
+    def __init__(self, file, encryptor: EncryptProtocol, chunk_size: int = 1024):
+        self._file = file
+        self._encryptor: EncryptProtocol = encryptor
+        self.chunk_size: int = chunk_size
+
+    async def encrypt_with_slicing(self):
+        while True:
+            data = await self._file.read(self.chunk_size)
+            if not data:
+                break
+            yield self._encryptor.encrypt(data)
