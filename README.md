@@ -12,13 +12,13 @@
 Поддержка только яндекс диска
 
 ```shell
-pip install encrypt-storages
+pip install encrypt-storage
 ```
 
 С поддержкой AWS S3
 
 ```shell
-pip install encrypt-storages[aws]
+pip install encrypt-storage[aws]
 ```
 
 ### Пример
