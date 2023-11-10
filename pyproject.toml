@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "encrypt-storage"
-version = "0.2.2"
-description = "Позволяет использовать Яндекс диск как хранилище с шифрованием"
+version = "0.2.3"
+description = "Позволяет шифровать и хранить файлы в облачном хранилище"
 authors = ["ig-rudenko <ig.rudenko1@yandex.ru>"]
 repository = "https://github.com/ig-rudenko/encrypt-storage"
 license = "Apache 2.0"
