@@ -2,10 +2,31 @@
 
 Используется потоковое шифрование
 
+Доступные хранилища:
+
+- Yandex.Disk
+- AWS S3
+
+### Установка
+
+Поддержка только яндекс диска
+
+```shell
+pip install encrypt-storages
+```
+
+С поддержкой AWS S3
+
+```shell
+pip install encrypt-storages[aws]
+```
+
+### Пример
+
 Синхронное использование
 
 ```python
-from encrypt_storages import YandexDiskStorage
+from encrypt_storage import YandexDiskStorage
 
 # Замените 'YOUR_ACCESS_TOKEN' на ваш токен Яндекс.Диска
 # Замените 'YOUR_ENCRYPTION_KEY' на ваш ключ шифрования
@@ -33,7 +54,7 @@ print(files)
 ```python
 import asyncio
 
-from encrypt_storages.asyncio import YandexDiskStorage
+from encrypt_storage.asyncio import YandexDiskStorage
 
 
 async def main():

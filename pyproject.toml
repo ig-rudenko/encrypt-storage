@@ -1,20 +1,25 @@
 [tool.poetry]
 name = "encrypt-storage"
-version = "0.1.4"
+version = "0.2.0"
 description = "Позволяет использовать Яндекс диск как хранилище с шифрованием"
 authors = ["ig-rudenko <ig.rudenko1@yandex.ru>"]
 repository = "https://github.com/ig-rudenko/encrypt-storage"
 license = "Apache 2.0"
 readme = "README.md"
-keywords = ["remote-storage", "yandex-disk", "encryption-decryption"]
-packages = [{include = "encrypt_storages"}]
+keywords = ["remote-storage", "encryption", "yandex-disk", "aws-s3", "encryption-decryption"]
+packages = [{include = "encrypt_storage"}]
 
 [tool.poetry.dependencies]
 python = ">3.9"
 requests = ">=2.31.0"
 cryptography = ">=41.0.5"
 aiohttp = ">=3.8.6"
-aiofiles = "^23.2.1"
+aiofiles = ">=23.2.1"
+boto3 = ">=1.28.83"
+botocore = ">=1.31.83"
+
+[tool.poetry.extras]
+aws = ["boto3", "botocore"]
 
 
 [tool.poetry.group.dev.dependencies]

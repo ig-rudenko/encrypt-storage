@@ -5,7 +5,7 @@ import aiofiles
 from aiohttp import ClientSession
 from urllib3.exceptions import ResponseError
 
-from encrypt_storages.types import File
+from encrypt_storage.types import File
 from ..encryptor.encryptor import FernetEncryptor
 from ..slicer.encrypt import AsyncEncryptSlicer
 from ..storages.abstract import AbstractStorage
