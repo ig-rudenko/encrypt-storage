@@ -1,14 +1,18 @@
 import pathlib
 
 from .abstract import AbstractStorage
-from ..encryptor.encryptor import FernetEncryptor
 from ..types import File
 
 
 class AwsS3Storage(AbstractStorage):
-    encryptor_class = FernetEncryptor
-
-    def __init__(self, bucket_name: str, encryption_key: str | bytes, *args, **kwargs):
+    def __init__(
+        self,
+        bucket_name: str,
+        encryption_key: str | bytes,
+        algorithm: str = "AES256",
+        *args,
+        **kwargs,
+    ):
         import boto3
 
         self._s3 = boto3.client("s3", *args, **kwargs)
@@ -23,7 +27,7 @@ class AwsS3Storage(AbstractStorage):
 
         # Определяем параметры загрузки, включая шифрование
         self._extra_args = {
-            "SSECustomerAlgorithm": "AES256",
+            "SSECustomerAlgorithm": algorithm,
             "SSECustomerKey": encryption_key,
         }
 
@@ -50,7 +54,10 @@ class AwsS3Storage(AbstractStorage):
     def list_files(self, path: str = "") -> list[File]:
         # Получаем список объектов в указанной папке
         response = self._s3.list_objects_v2(Bucket=self._bucket_name, Prefix=path)
+        return self._format_list_files_response(response, path)
 
+    @staticmethod
+    def _format_list_files_response(response: dict, path: str) -> list[File]:
         # Обрабатываем каждый объект и создаем объекты File
         files = []
         for obj in response.get("Contents", []):

@@ -4,8 +4,8 @@
 
 Доступные хранилища:
 
-- Yandex.Disk
-- AWS S3
+- Yandex.Disk (sync/async)
+- AWS S3 (sync/async)
 
 ### Установка
 

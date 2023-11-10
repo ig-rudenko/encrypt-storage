@@ -966,4 +966,4 @@ aws = ["boto3", "botocore"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">3.9"
-content-hash = "40ebe0fcc4347a695fc475515e6152799e2907ecb053b8f5b44c29114007f02b"
+content-hash = "b5ddbd724324130709783fb5f79f4e8581fc1be6b44c13cf63770af1609c6059"
